@@ -75,7 +75,8 @@
         </div>
 
         <div class="hero-content">
-            <div class="hero-badge" data-i18n="hero_badge">&#x1F4BC; Disponible para oportunidades</div>
+            <a href="#contacto" class="hero-badge" data-i18n="hero_badge"
+                style="text-decoration:none;cursor:pointer">&#x1F4BC; Disponible para oportunidades</a>
             <p class="hero-greeting" data-i18n="hero_greeting">Hola, soy</p>
             <h1 class="hero-name">Víctor Astray</h1>
             <div class="hero-role">
@@ -116,7 +117,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-card">
-                    <span class="stat-number" data-target="12">0</span>
+                    <span class="stat-number" data-target="11">0</span>
                     <span class="stat-label" data-i18n="stat_projects">Proyectos</span>
                 </div>
                 <div class="stat-card">
@@ -362,8 +363,8 @@
             <!-- Grid de proyectos -->
             <div class="projects-grid" id="projects-grid">
 
-                <!-- ★ FEATURED ★ Gramola -->
-                <article class="project-card featured" data-category="web" data-tech="java angular">
+                <!-- 1. Gramola -->
+                <article class="project-card" data-category="web" data-tech="java angular">
                     <div class="project-card-inner">
                         <div class="project-header">
                             <div class="project-icon"><i class="fas fa-music"></i></div>
@@ -372,7 +373,6 @@
                                         class="fab fa-github"></i></a>
                             </div>
                         </div>
-                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
                         <h3>La Gramola</h3>
                         <p data-i18n="proj_gramola_desc">Aplicación fullstack de música on-demand con integración de
                             <strong>Spotify API</strong> y pagos con <strong>Stripe</strong>. Backend en Spring Boot
@@ -386,30 +386,8 @@
                     </div>
                 </article>
 
-                <!-- ★ FEATURED ★ Spotify DW -->
-                <article class="project-card featured" data-category="dev" data-tech="python sql">
-                    <div class="project-card-inner">
-                        <div class="project-header">
-                            <div class="project-icon"><i class="fas fa-database"></i></div>
-                            <div class="project-links">
-                                <a href="https://github.com/VictorAstray/Astray_Callejas-Proyecto_Spotify"
-                                    target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
-                        <h3>Spotify Data Warehouse</h3>
-                        <p data-i18n="proj_spotify_desc">Data Warehouse completo para análisis de datos de Spotify.
-                            Pipeline ETL con Python que procesa CSVs y carga tablas dimensionales y de hechos en MySQL.
-                            Consultas OLAP avanzadas para inteligencia de negocio.</p>
-                        <div class="project-tags">
-                            <span>Python</span><span>MySQL</span><span>ETL</span><span>OLAP</span><span>Data
-                                Warehouse</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- ★ FEATURED ★ IPOkemonApp -->
-                <article class="project-card featured" data-category="game" data-tech="csharp">
+                <!-- 2. IPOkemonApp -->
+                <article class="project-card" data-category="game" data-tech="csharp">
                     <div class="project-card-inner">
                         <div class="project-header">
                             <div class="project-icon"><i class="fas fa-dragon"></i></div>
@@ -421,7 +399,6 @@
                                         class="fab fa-github"></i></a>
                             </div>
                         </div>
-                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
                         <h3>IPOkemonApp</h3>
                         <p data-i18n="proj_ipokemon_desc">Aplicación de escritorio en <strong>C# / .NET MAUI</strong>
                             con menú lateral, Pokédex personal, fichas detalladas de Pokémon (stats, evolución,
@@ -434,8 +411,31 @@
                     </div>
                 </article>
 
-                <!-- AgriTech -->
-                <article class="project-card featured" data-category="dev" data-tech="python">
+                <!-- 3. Media Station Pro -->
+                <article class="project-card" data-category="dev" data-tech="python">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-play-circle"></i></div>
+                            <div class="project-links">
+                                <a href="demo-multimedia.html" target="_blank"
+                                    style="background:rgba(100,255,218,0.12);border:1px solid rgba(100,255,218,0.4);color:var(--accent);padding:4px 10px;border-radius:6px;font-size:.75rem;font-family:var(--font-mono);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px;"
+                                    data-i18n="demo_btn">▶ Demo</a>
+                                <a href="https://github.com/VictorAstray/ReproductorCompresor_Multimedia"
+                                    target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <h3>Media Station Pro</h3>
+                        <p data-i18n="proj_media_desc">Reproductor multimedia en <strong>Python</strong> con interfaz
+                            gráfica y sistema integrado de <strong>compresión algorítmica (RLE, Huffman)</strong>.
+                            Permite optimizar el almacenamiento del contenido sin perder calidad.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>CustomTkinter</span><span>RLE / Huffman</span><span>VLC</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. AgriTech -->
+                <article class="project-card" data-category="dev" data-tech="python">
                     <div class="project-card-inner">
                         <div class="project-header">
                             <div class="project-icon"><i class="fas fa-leaf"></i></div>
@@ -444,7 +444,6 @@
                                         class="fab fa-github"></i></a>
                             </div>
                         </div>
-                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
                         <h3>AgriTech Platform</h3>
                         <p data-i18n="proj_agritech_desc">Plataforma de inteligencia de negocio para agricultores y
                             cooperativas. Analiza datos climáticos y de mercado para recomendar momentos óptimos de
@@ -456,67 +455,28 @@
                     </div>
                 </article>
 
-                <!-- Sistemas Distribuidos -->
-                <article class="project-card" data-category="dev" data-tech="python">
+                <!-- 5. Spotify DW -->
+                <article class="project-card" data-category="dev" data-tech="python sql">
                     <div class="project-card-inner">
                         <div class="project-header">
-                            <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                            <div class="project-icon"><i class="fas fa-database"></i></div>
                             <div class="project-links">
-                                <a href="https://github.com/VictorAstray/extra_distribuidos" target="_blank"
-                                    title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://github.com/VictorAstray/Astray_Callejas-Proyecto_Spotify"
+                                    target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
-                        <h3 data-i18n="proj_dist_title">Sistemas Distribuidos</h3>
-                        <p data-i18n="proj_dist_desc">Middleware de comunicación orientado a objetos con ZeroC Ice y
-                            colas de mensajes con Kafka. Implementación de patrones distribuidos robustos para entornos
-                            de alta concurrencia.</p>
+                        <h3>Spotify Data Warehouse</h3>
+                        <p data-i18n="proj_spotify_desc">Data Warehouse completo para análisis de datos de Spotify.
+                            Pipeline ETL con Python que procesa CSVs y carga tablas dimensionales y de hechos en MySQL.
+                            Consultas OLAP avanzadas para inteligencia de negocio.</p>
                         <div class="project-tags">
-                            <span>Python</span><span>ZeroC Ice</span><span>Kafka</span><span>Distributed</span>
+                            <span>Python</span><span>MySQL</span><span>ETL</span><span>OLAP</span><span>Data
+                                Warehouse</span>
                         </div>
                     </div>
                 </article>
 
-                <!-- Seguridad CVE -->
-                <article class="project-card" data-category="security" data-tech="security">
-                    <div class="project-card-inner">
-                        <div class="project-header">
-                            <div class="project-icon security-icon"><i class="fas fa-user-secret"></i></div>
-                            <div class="project-links">
-                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
-                                    Privado</span>
-                            </div>
-                        </div>
-                        <h3 data-i18n="proj_sec_title">Auditoría & Exploits CVE</h3>
-                        <p data-i18n="proj_sec_desc">Investigación y explotación de vulnerabilidades reales (CVEs) en
-                            entornos controlados. Scripts de explotación con documentación de vectores de ataque y
-                            parches de mitigación.</p>
-                        <div class="project-tags">
-                            <span>Kali Linux</span><span>Bash</span><span>CVE</span><span>Ethical Hacking</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Multimedia Player -->
-                <article class="project-card" data-category="dev" data-tech="cpp">
-                    <div class="project-card-inner">
-                        <div class="project-header">
-                            <div class="project-icon"><i class="fas fa-play-circle"></i></div>
-                            <div class="project-links">
-                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
-                                    Privado</span>
-                            </div>
-                        </div>
-                        <h3>Multimedia Player</h3>
-                        <p data-i18n="proj_media_desc">Reproductor de vídeo y audio con implementación propia de
-                            algoritmos de compresión (RLE, Huffman) para optimizar almacenamiento sin dependencias
-                            externas.</p>
-                        <div class="project-tags">
-                            <span>C++</span><span>Algoritmos</span><span>Compresión</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Web Iker -->
+                <!-- 6. Web Iker -->
                 <article class="project-card" data-category="web" data-tech="web">
                     <div class="project-card-inner">
                         <div class="project-header">
@@ -536,27 +496,7 @@
                     </div>
                 </article>
 
-                <!-- Pokémon -->
-                <article class="project-card" data-category="game" data-tech="cpp">
-                    <div class="project-card-inner">
-                        <div class="project-header">
-                            <div class="project-icon"><i class="fas fa-gamepad"></i></div>
-                            <div class="project-links">
-                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
-                                    Privado</span>
-                            </div>
-                        </div>
-                        <h3>Pokémon Engine</h3>
-                        <p data-i18n="proj_poke_desc">Motor de juego 2D con animaciones pixel-art propias y sistema de
-                            combate por turnos programado desde cero, sin game engine. Gestión de estados y eventos
-                            personalizada.</p>
-                        <div class="project-tags">
-                            <span>C++</span><span>Game Dev</span><span>Pixel-Art</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Sokoban -->
+                <!-- 7. Sokoban -->
                 <article class="project-card" data-category="game" data-tech="python">
                     <div class="project-card-inner">
                         <div class="project-header">
@@ -572,6 +512,46 @@
                             gráfica.</p>
                         <div class="project-tags">
                             <span>Python</span><span>Lógica</span><span>Matrices</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 8. Seguridad CVE -->
+                <article class="project-card" data-category="security" data-tech="security">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon security-icon"><i class="fas fa-user-secret"></i></div>
+                            <div class="project-links">
+                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
+                                    Privado</span>
+                            </div>
+                        </div>
+                        <h3 data-i18n="proj_sec_title">Auditoría & Exploits CVE</h3>
+                        <p data-i18n="proj_sec_desc">Investigación y explotación de vulnerabilidades reales (CVEs) en
+                            entornos controlados. Scripts de explotación con documentación de vectores de ataque y
+                            parches de mitigación.</p>
+                        <div class="project-tags">
+                            <span>Kali Linux</span><span>Bash</span><span>CVE</span><span>Ethical Hacking</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 9. Sistemas Distribuidos -->
+                <article class="project-card" data-category="dev" data-tech="python">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/VictorAstray/extra_distribuidos" target="_blank"
+                                    title="GitHub"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <h3 data-i18n="proj_dist_title">Sistemas Distribuidos</h3>
+                        <p data-i18n="proj_dist_desc">Middleware de comunicación orientado a objetos con ZeroC Ice y
+                            colas de mensajes con Kafka. Implementación de patrones distribuidos robustos para entornos
+                            de alta concurrencia.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>ZeroC Ice</span><span>Kafka</span><span>Distributed</span>
                         </div>
                     </div>
                 </article>
