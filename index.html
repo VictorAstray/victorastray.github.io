@@ -1,354 +1,654 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Víctor Astray | Portfolio de Ingeniería</title>
-    
-    <!-- Fuentes Modernas -->
+    <title>Víctor Astray | Ingeniería de Software</title>
+    <meta name="description"
+        content="Portfolio de Víctor Astray Roma — Ingeniero de Software, especializado en Backend, Data Engineering y Ciberseguridad.">
+
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <!-- Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- Navegación -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="#" class="logo">V.A.</a>
-            <div class="nav-menu">
-                <a href="#inicio" class="nav-link" data-i18n="nav_home">Inicio</a>
-                <a href="#sobre-mi" class="nav-link" data-i18n="nav_about">Perfil</a>
-                <a href="#skills" class="nav-link" data-i18n="nav_stack">Stack</a>
-                <a href="#proyectos" class="nav-link" data-i18n="nav_projects">Proyectos</a>
-                <a href="#contacto" class="btn-outline" data-i18n="nav_contact">Contacto</a>
-                
+    <!-- ══════════════════════════════════════
+         CURSOR PERSONALIZADO
+    ══════════════════════════════════════ -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- ══════════════════════════════════════
+         NAVBAR
+    ══════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="logo">
+                <span class="logo-bracket">[</span>VA<span class="logo-bracket">]</span>
+            </a>
+
+            <div class="nav-menu" id="nav-menu">
+                <a href="#inicio" class="nav-link" data-section="inicio" data-i18n="nav_home">Inicio</a>
+                <a href="#sobre-mi" class="nav-link" data-section="sobre-mi" data-i18n="nav_about">Sobre mí</a>
+                <a href="#skills" class="nav-link" data-section="skills" data-i18n="nav_stack">Skills</a>
+                <a href="#proyectos" class="nav-link" data-section="proyectos" data-i18n="nav_projects">Proyectos</a>
+                <a href="#contacto" class="nav-link" data-section="contacto" data-i18n="nav_contact">Contacto</a>
+
                 <div class="nav-controls">
-                    <!-- Botón Idioma -->
-                    <button id="lang-toggle" class="control-btn" aria-label="Cambiar Idioma">
+                    <button id="lang-toggle" class="ctrl-btn" aria-label="Cambiar idioma">
                         <span class="lang-text">ES</span>
                     </button>
-                    <!-- Botón Tema -->
-                    <button id="theme-toggle" class="control-btn" aria-label="Cambiar Tema">
+                    <button id="theme-toggle" class="ctrl-btn" aria-label="Cambiar tema">
                         <i class="fas fa-moon"></i>
                     </button>
                 </div>
             </div>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="inicio" class="hero">
-        <div class="hero-bg-animation">
-            <div class="blob blob-1"></div>
-            <div class="blob blob-2"></div>
+    <!-- ══════════════════════════════════════
+         HERO
+    ══════════════════════════════════════ -->
+    <section id="inicio" class="hero">
+        <!-- Fondo animado -->
+        <div class="hero-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="grid-overlay"></div>
         </div>
-        
-        <div class="container hero-container">
-            <span class="greeting" data-i18n="hero_greeting">Hola, soy</span>
-            <h1 class="main-title">Víctor Astray</h1>
-            <h2 class="subtitle" data-i18n="hero_subtitle">Ingeniería & <span class="text-gradient">Código Limpio</span>.</h2>
-            <p class="bio-hero" data-i18n="hero_bio">
-                Estudiante de Ingeniería Informática enfocado en crear soluciones robustas. Especializado en transformar datos complejos y algoritmos en aplicaciones funcionales y seguras.
+
+        <div class="hero-content">
+            <div class="hero-badge" data-i18n="hero_badge">&#x1F4BC; Disponible para oportunidades</div>
+            <p class="hero-greeting" data-i18n="hero_greeting">Hola, soy</p>
+            <h1 class="hero-name">Víctor Astray</h1>
+            <div class="hero-role">
+                <span data-i18n="hero_role_prefix">Apasionado del </span><span id="typewriter"
+                    class="typewriter-text"></span><span class="typewriter-cursor">|</span>
+            </div>
+            <p class="hero-bio" data-i18n="hero_bio">
+                Estudiante de Ingeniería Informática en la UCLM. Me gusta un poco de todo: frontend, backend, Python,
+                Java... Disfruto del proceso completo de construir algo desde cero hasta que quede bien.
             </p>
-            <div class="hero-btns">
-                <!-- Botón único y centrado -->
-                <a href="doc/CV - Víctor Astray Roma.pdf" target="_blank" class="btn-primary" data-i18n="hero_btn_cv">Descargar CV <i class="fas fa-download"></i></a>
+            <div class="hero-actions">
+                <a href="doc/CV - Víctor Astray Roma.pdf" target="_blank" class="btn-primary" data-i18n="hero_cv">
+                    <i class="fas fa-download"></i> Descargar CV
+                </a>
+                <a href="#proyectos" class="btn-ghost" data-i18n="hero_projects_btn">
+                    Ver proyectos <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="hero-socials">
+                <a href="https://github.com/VictorAstray" target="_blank" aria-label="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/v%C3%ADctor-astray-roma-3aa9283a3/" target="_blank"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:victor.astray@alu.uclm.es" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
-    </header>
 
-    <!-- Sobre Mí -->
-    <section id="sobre-mi" class="section">
+        <div class="hero-scroll-indicator">
+            <div class="scroll-line"></div>
+            <span data-i18n="hero_scroll">Scroll</span>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         STATS
+    ══════════════════════════════════════ -->
+    <section class="stats-section reveal">
         <div class="container">
-            <h2 class="section-title" data-i18n="about_title">Sobre Mí</h2>
-            <div class="line"></div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" data-target="12">0</span>
+                    <span class="stat-label" data-i18n="stat_projects">Proyectos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-label" data-i18n="stat_languages">Lenguajes</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="4">0</span>
+                    <span class="stat-label" data-i18n="stat_years">Años cod.</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="3">0</span>
+                    <span class="stat-label" data-i18n="stat_areas">Áreas</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="about-content">
-                <div class="about-text">
+    <!-- ══════════════════════════════════════
+         SOBRE MÍ
+    ══════════════════════════════════════ -->
+    <section id="sobre-mi" class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-i18n="about_tag">// sobre mí</span>
+                <h2 class="section-title" data-i18n="about_title">Quién Soy</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text-col">
                     <p data-i18n="about_p1">
-                        Más allá del código, soy un <strong>solucionador de problemas</strong>. Mi trayectoria en la UCLM me ha dado la base teórica, pero mi curiosidad autodidacta es lo que me impulsa a dominar tecnologías como Python para Data Science o C++ para optimización.
+                        Soy un desarrollador <strong>versátil y polivalente</strong>. Más que especializarme en una sola
+                        área, disfruto del proceso completo: diseñar la interfaz, construir el backend, modelar los
+                        datos y hacer que todo funcione junto. Si algo me tiene que definir, es que <strong>me encanta
+                            el frontend</strong> — me apasiona que las aplicaciones se sientan bien.
                     </p>
                     <p data-i18n="about_p2">
-                        Me apasiona encontrar el equilibrio entre la <strong>seguridad</strong> (hacking ético) y la <strong>usabilidad</strong>. No me limito a "hacer que funcione", busco que sea escalable y eficiente.
+                        Trabajo con fluidez en <strong>Python y Java</strong> (Spring Boot, Angular) y me siento cómodo
+                        tanto en el lado del cliente como del servidor. He trabajado en proyectos de <strong>Data
+                            Engineering</strong>, aplicaciones fullstack con integraciones externas (Spotify, Stripe) y
+                        herramientas de análisis de datos. Busco un equipo donde pueda seguir creciendo y aportar desde
+                        el día uno.
                     </p>
-                </div>
-                <div class="about-img-wrapper">
-                    <img src="img/foto.jpg" alt="Víctor Astray" class="profile-pic">
-                    <div class="img-border"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" class="section bg-light">
-        <div class="container">
-            <h2 class="section-title" data-i18n="skills_title">Stack Tecnológico</h2>
-            <div class="line"></div>
-
-            <div class="tech-wrapper">
-                <h3 class="tech-category" data-i18n="skills_cat_core">Lenguajes Core</h3>
-                <div class="tech-grid">
-                    <div class="tech-card"><i class="devicon-python-plain colored"></i><span>Python</span></div>
-                    <div class="tech-card"><i class="devicon-java-plain colored"></i><span>Java</span></div>
-                    <div class="tech-card"><i class="devicon-cplusplus-plain colored"></i><span>C++</span></div>
-                    <div class="tech-card"><i class="devicon-csharp-plain colored"></i><span>C#</span></div>
-                    <div class="tech-card"><i class="devicon-r-plain colored"></i><span>R</span></div>
-                </div>
-
-                <h3 class="tech-category" data-i18n="skills_cat_web">Web & Datos</h3>
-                <div class="tech-grid">
-                    <div class="tech-card"><i class="devicon-html5-plain colored"></i><span>HTML5</span></div>
-                    <div class="tech-card"><i class="devicon-css3-plain colored"></i><span>CSS3</span></div>
-                    <div class="tech-card"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
-                    <div class="tech-card"><i class="devicon-wordpress-plain colored"></i><span>WordPress</span></div>
-                    <div class="tech-card"><i class="devicon-mysql-plain colored"></i><span>SQL</span></div>
-                </div>
-
-                <h3 class="tech-category" data-i18n="skills_cat_tools">Herramientas & Seguridad</h3>
-                <div class="tech-grid">
-                    <div class="tech-card"><i class="devicon-git-plain colored"></i><span>Git</span></div>
-                    <div class="tech-card"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
-                    <div class="tech-card"><i class="devicon-vscode-plain colored"></i><span>VS Code</span></div>
-                    <div class="tech-card"><i class="fas fa-shield-alt" style="color: #64ffda;"></i><span>Kali / CVE</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trayectoria Mejorada -->
-    <section id="trayectoria" class="section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="path_title">Mi Camino</h2>
-            <div class="line"></div>
-            
-            <div class="timeline-modern">
-                <!-- Item 1 -->
-                <div class="timeline-card">
-                    <div class="timeline-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <span class="timeline-date" data-i18n="path_item1_date">2022 - Actualidad</span>
-                        <h3 data-i18n="path_item1_title">Grado en Ingeniería Informática</h3>
-                        <h4>Universidad de Castilla-La Mancha (UCLM)</h4>
-                        <p data-i18n="path_item1_desc">Último curso. Especialización en Arquitectura del Software, Sistemas Distribuidos y Ciberseguridad.</p>
-                    </div>
-                </div>
-                
-                <!-- Item 2 -->
-                <div class="timeline-card">
-                    <div class="timeline-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <span class="timeline-date" data-i18n="path_item2_date">2020 - 2022</span>
-                        <h3 data-i18n="path_item2_title">Bachillerato de Ciencias</h3>
-                        <h4>IES María Moliner</h4>
-                        <p data-i18n="path_item2_desc">Excelencia académica en ramas matemáticas y físicas.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Proyectos -->
-    <section id="proyectos" class="section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="projects_title">Proyectos Destacados</h2>
-            <div class="line"></div>
-
-            <!-- Filtros -->
-            <div class="filter-wrapper">
-                <div class="filter-container">
-                    <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Todos</button>
-                    <button class="filter-btn" data-filter="dev" data-i18n="filter_dev">Software & Data</button>
-                    <button class="filter-btn" data-filter="web" data-i18n="filter_web">Web</button>
-                    <button class="filter-btn" data-filter="game" data-i18n="filter_game">Juegos</button>
-                </div>
-            </div>
-
-            <div class="tech-filter-wrapper">
-                <span class="filter-label"><i class="fas fa-filter"></i> Tech:</span>
-                <div class="tech-filter-container">
-                    <button class="tech-btn" data-tech="python">Python</button>
-                    <button class="tech-btn" data-tech="cpp">C++</button>
-                    <button class="tech-btn" data-tech="security" data-i18n="tech_security">Seguridad</button>
-                    <button class="tech-btn" data-tech="distributed" data-i18n="tech_distributed">Distribuidos</button>
-                </div>
-            </div>
-
-            <div class="projects-grid">
-                
-                <!-- AgriTech -->
-                <article class="project-item" data-category="dev" data-tech="python">
-                    <div class="project-top">
-                        <div class="folder"><i class="far fa-folder-open"></i></div>
-                        <div class="links">
-                            <a href="https://github.com/VictorAstray/isi-AgriTech" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <div class="about-facts">
+                        <div class="fact">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span data-i18n="about_fact1">Grado en Ing. Informática — UCLM (2022–2026)</span>
+                        </div>
+                        <div class="fact">
+                            <i class="fas fa-heart"></i>
+                            <span data-i18n="about_fact2">Frontend · Backend · Python · Java</span>
+                        </div>
+                        <div class="fact">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-i18n="about_fact3">Albacete, España · Inglés B2</span>
                         </div>
                     </div>
-                    <h3>AgriTech Platform</h3>
-                    <p data-i18n="proj_agritech_desc">Plataforma de inteligencia de negocios para el sector agrícola. Recomienda momentos de siembra basados en análisis de datos históricos.</p>
-                    <div class="tags">
-                        <span>Python</span><span>Data Science</span><span>Pandas</span>
+                </div>
+                <div class="about-img-col">
+                    <div class="profile-wrapper">
+                        <img src="img/foto.jpg" alt="Víctor Astray" class="profile-img">
+                        <div class="profile-glow"></div>
+                        <div class="profile-badge-stack">
+                            <span>Frontend</span>
+                            <span>Fullstack</span>
+                            <span>Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SKILLS
+    ══════════════════════════════════════ -->
+    <section id="skills" class="section section-alt reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-i18n="skills_tag">// stack técnico</span>
+                <h2 class="section-title" data-i18n="skills_title">Tecnologías</h2>
+            </div>
+
+            <div class="skills-layout">
+                <!-- Columna izquierda: tarjetas de tech -->
+                <div class="skills-cards-col">
+                    <div class="skill-group">
+                        <h3 class="skill-group-label" data-i18n="skills_cat_core"><i class="fas fa-code"></i> Lenguajes
+                        </h3>
+                        <div class="tech-grid">
+                            <div class="tech-pill"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+                            <div class="tech-pill"><i class="devicon-java-plain colored"></i><span>Java</span></div>
+                            <div class="tech-pill"><i class="devicon-cplusplus-plain colored"></i><span>C++</span></div>
+                            <div class="tech-pill"><i class="devicon-csharp-plain colored"></i><span>C#</span></div>
+                            <div class="tech-pill"><i class="devicon-r-plain colored"></i><span>R</span></div>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group-label" data-i18n="skills_cat_frameworks"><i
+                                class="fas fa-layer-group"></i> Frameworks & Datos</h3>
+                        <div class="tech-grid">
+                            <div class="tech-pill"><i class="devicon-spring-plain colored"></i><span>Spring Boot</span>
+                            </div>
+                            <div class="tech-pill"><i class="devicon-angularjs-plain colored"></i><span>Angular</span>
+                            </div>
+                            <div class="tech-pill"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
+                            <div class="tech-pill"><i class="devicon-pandas-plain colored"></i><span>Pandas</span></div>
+                            <div class="tech-pill"><i class="devicon-selenium-plain colored"></i><span>Selenium</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group-label" data-i18n="skills_cat_tools"><i class="fas fa-tools"></i>
+                            Herramientas</h3>
+                        <div class="tech-grid">
+                            <div class="tech-pill"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+                            <div class="tech-pill"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
+                            <div class="tech-pill"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+                            <div class="tech-pill"><i class="devicon-vscode-plain colored"></i><span>VS Code</span>
+                            </div>
+                            <div class="tech-pill"><i class="fas fa-shield-alt" style="color:#64ffda"></i><span>Kali /
+                                    CVE</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna derecha: barras de dominio -->
+                <div class="skills-bars-col">
+                    <h3 class="skill-group-label" data-i18n="skills_proficiency"><i class="fas fa-chart-bar"></i> Nivel
+                        de dominio</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span>Python</span><span class="skill-pct">90%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-pct="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span>Java / Spring Boot</span><span class="skill-pct">80%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-pct="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span>SQL Avanzado</span><span class="skill-pct">85%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-pct="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span>C++</span><span class="skill-pct">75%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-pct="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span>Ciberseguridad</span><span class="skill-pct">70%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-pct="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span>Angular / TypeScript</span><span class="skill-pct">65%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-pct="65"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         TRAYECTORIA
+    ══════════════════════════════════════ -->
+    <section id="trayectoria" class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-i18n="path_tag">// trayectoria</span>
+                <h2 class="section-title" data-i18n="path_title">Mi Camino</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-dot"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="tl-line"></div>
+                    <div class="tl-card">
+                        <span class="tl-date" data-i18n="path_date1">2022 — Actualidad</span>
+                        <h3 data-i18n="path_title1">Grado en Ingeniería Informática</h3>
+                        <h4>Universidad de Castilla-La Mancha</h4>
+                        <p data-i18n="path_desc1">Último curso. Especialización en Arquitectura del Software, Sistemas
+                            Distribuidos, Bases de Datos Avanzadas y Ciberseguridad.</p>
+                        <div class="tl-tags"><span>Java</span><span>Python</span><span>SQL</span><span>C++</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-dot"><i class="fas fa-school"></i></div>
+                    <div class="tl-line"></div>
+                    <div class="tl-card">
+                        <span class="tl-date" data-i18n="path_date2">2020 — 2022</span>
+                        <h3 data-i18n="path_title2">Bachillerato de Ciencias</h3>
+                        <h4>IES María Moliner</h4>
+                        <p data-i18n="path_desc2">Excelencia académica en ramas matemáticas y físicas. Primer contacto
+                            con la programación.</p>
+                        <div class="tl-tags"><span>Matemáticas</span><span>Física</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         PROYECTOS
+    ══════════════════════════════════════ -->
+    <section id="proyectos" class="section section-alt reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-i18n="proj_tag">// proyectos</span>
+                <h2 class="section-title" data-i18n="proj_title">Proyectos Destacados</h2>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Todos</button>
+                <button class="filter-btn" data-filter="dev" data-i18n="filter_dev">Backend & Data</button>
+                <button class="filter-btn" data-filter="web" data-i18n="filter_web">Web & Fullstack</button>
+                <button class="filter-btn" data-filter="game" data-i18n="filter_game">Juegos</button>
+                <button class="filter-btn" data-filter="security" data-i18n="filter_sec">Seguridad</button>
+            </div>
+
+            <!-- Grid de proyectos -->
+            <div class="projects-grid" id="projects-grid">
+
+                <!-- ★ FEATURED ★ Gramola -->
+                <article class="project-card featured" data-category="web" data-tech="java angular">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-music"></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/VictorAstray/Gramola" target="_blank" title="GitHub"><i
+                                        class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
+                        <h3>La Gramola</h3>
+                        <p data-i18n="proj_gramola_desc">Aplicación fullstack de música on-demand con integración de
+                            <strong>Spotify API</strong> y pagos con <strong>Stripe</strong>. Backend en Spring Boot
+                            (Java 17) y Frontend en Angular. Incluye pruebas E2E con Selenium y modo mock para
+                            desarrollo sin credenciales.
+                        </p>
+                        <div class="project-tags">
+                            <span>Java 17</span><span>Spring Boot</span><span>Angular</span><span>Spotify
+                                API</span><span>Stripe</span><span>Selenium</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ★ FEATURED ★ Spotify DW -->
+                <article class="project-card featured" data-category="dev" data-tech="python sql">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-database"></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/VictorAstray/Astray_Callejas-Proyecto_Spotify"
+                                    target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
+                        <h3>Spotify Data Warehouse</h3>
+                        <p data-i18n="proj_spotify_desc">Data Warehouse completo para análisis de datos de Spotify.
+                            Pipeline ETL con Python que procesa CSVs y carga tablas dimensionales y de hechos en MySQL.
+                            Consultas OLAP avanzadas para inteligencia de negocio.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>MySQL</span><span>ETL</span><span>OLAP</span><span>Data
+                                Warehouse</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ★ FEATURED ★ IPOkemonApp -->
+                <article class="project-card featured" data-category="game" data-tech="csharp">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-dragon"></i></div>
+                            <div class="project-links">
+                                <a href="demo-ipokemon.html" target="_blank"
+                                    style="background:rgba(100,255,218,0.12);border:1px solid rgba(100,255,218,0.4);color:var(--accent);padding:4px 10px;border-radius:6px;font-size:.75rem;font-family:var(--font-mono);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px;"
+                                    data-i18n="demo_btn">▶ Demo</a>
+                                <a href="https://github.com/VictorAstray/IPOkemonApp" target="_blank" title="GitHub"><i
+                                        class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
+                        <h3>IPOkemonApp</h3>
+                        <p data-i18n="proj_ipokemon_desc">Aplicación de escritorio en <strong>C# / .NET MAUI</strong>
+                            con menú lateral, Pokédex personal, fichas detalladas de Pokémon (stats, evolución,
+                            descripción) y sistema de <strong>combate por turnos</strong> con IA. Incluye demo web
+                            interactiva.</p>
+                        <div class="project-tags">
+                            <span>C#</span><span>.NET MAUI</span><span>WinUI</span><span>XAML</span><span>Visual
+                                Studio</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- AgriTech -->
+                <article class="project-card featured" data-category="dev" data-tech="python">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-leaf"></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/VictorAstray/isi-AgriTech" target="_blank" title="GitHub"><i
+                                        class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-featured-badge" data-i18n="badge_featured">★ Destacado</div>
+                        <h3>AgriTech Platform</h3>
+                        <p data-i18n="proj_agritech_desc">Plataforma de inteligencia de negocio para agricultores y
+                            cooperativas. Analiza datos climáticos y de mercado para recomendar momentos óptimos de
+                            siembra y venta, maximizando la rentabilidad.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Data Science</span><span>Pandas</span><span>Business
+                                Intelligence</span>
+                        </div>
                     </div>
                 </article>
 
                 <!-- Sistemas Distribuidos -->
-                <article class="project-item" data-category="dev" data-tech="python distributed">
-                    <div class="project-top">
-                        <div class="folder"><i class="fas fa-network-wired"></i></div>
-                        <div class="links">
-                            <a href="https://github.com/VictorAstray/extra_distribuidos" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <article class="project-card" data-category="dev" data-tech="python">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                            <div class="project-links">
+                                <a href="https://github.com/VictorAstray/extra_distribuidos" target="_blank"
+                                    title="GitHub"><i class="fab fa-github"></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <h3 data-i18n="proj_dist_title">Sistemas Distribuidos</h3>
-                    <p data-i18n="proj_dist_desc">Middleware de comunicación orientado a objetos y colas de mensajes. Implementación robusta de patrones distribuidos.</p>
-                    <div class="tags">
-                        <span>Python</span><span>ZeroC Ice</span><span>Kafka</span>
+                        <h3 data-i18n="proj_dist_title">Sistemas Distribuidos</h3>
+                        <p data-i18n="proj_dist_desc">Middleware de comunicación orientado a objetos con ZeroC Ice y
+                            colas de mensajes con Kafka. Implementación de patrones distribuidos robustos para entornos
+                            de alta concurrencia.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>ZeroC Ice</span><span>Kafka</span><span>Distributed</span>
+                        </div>
                     </div>
                 </article>
 
-                <!-- La Gramola -->
-                <article class="project-item" data-category="dev" data-tech="java cpp">
-                    <div class="project-top">
-                        <div class="folder"><i class="fas fa-music"></i></div>
-                        <div class="links">
-                            <a href="#" title="Dev"><i class="fab fa-github"></i></a>
+                <!-- Seguridad CVE -->
+                <article class="project-card" data-category="security" data-tech="security">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon security-icon"><i class="fas fa-user-secret"></i></div>
+                            <div class="project-links">
+                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
+                                    Privado</span>
+                            </div>
                         </div>
-                    </div>
-                    <h3>La Gramola</h3>
-                    <p data-i18n="proj_gramola_desc">Sistema de gestión musical enfocado en Patrones de Diseño (GoF) y Arquitectura de Software robusta y mantenible.</p>
-                    <div class="tags">
-                        <span>Java</span><span>Patterns</span><span>Arquitectura</span>
+                        <h3 data-i18n="proj_sec_title">Auditoría & Exploits CVE</h3>
+                        <p data-i18n="proj_sec_desc">Investigación y explotación de vulnerabilidades reales (CVEs) en
+                            entornos controlados. Scripts de explotación con documentación de vectores de ataque y
+                            parches de mitigación.</p>
+                        <div class="project-tags">
+                            <span>Kali Linux</span><span>Bash</span><span>CVE</span><span>Ethical Hacking</span>
+                        </div>
                     </div>
                 </article>
 
-                <!-- Seguridad -->
-                <article class="project-item" data-category="dev" data-tech="security">
-                    <div class="project-top">
-                        <div class="folder"><i class="fas fa-user-secret"></i></div>
-                        <div class="links">
-                            <a href="mailto:victor.astray@alu.uclm.es" title="Acceso"><i class="fas fa-lock"></i></a>
+                <!-- Multimedia Player -->
+                <article class="project-card" data-category="dev" data-tech="cpp">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-play-circle"></i></div>
+                            <div class="project-links">
+                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
+                                    Privado</span>
+                            </div>
                         </div>
-                    </div>
-                    <h3 data-i18n="proj_sec_title">Auditoría & Exploits CVE</h3>
-                    <p data-i18n="proj_sec_desc">Investigación de vulnerabilidades (CVEs). Desarrollo de scripts de explotación en entornos controlados y documentación de parches.</p>
-                    <div class="tags">
-                        <span>Kali Linux</span><span>Bash</span><span>Hacking</span>
-                    </div>
-                </article>
-
-                <!-- Multimedia -->
-                <article class="project-item" data-category="dev" data-tech="cpp">
-                    <div class="project-top">
-                        <div class="folder"><i class="fas fa-play-circle"></i></div>
-                        <div class="links">
-                            <a href="mailto:victor.astray@alu.uclm.es" title="Privado"><i class="fas fa-cloud"></i></a>
+                        <h3>Multimedia Player</h3>
+                        <p data-i18n="proj_media_desc">Reproductor de vídeo y audio con implementación propia de
+                            algoritmos de compresión (RLE, Huffman) para optimizar almacenamiento sin dependencias
+                            externas.</p>
+                        <div class="project-tags">
+                            <span>C++</span><span>Algoritmos</span><span>Compresión</span>
                         </div>
-                    </div>
-                    <h3>Multimedia Player</h3>
-                    <p data-i18n="proj_media_desc">Reproductor de vídeo/audio con implementación propia de algoritmos de compresión para optimizar almacenamiento.</p>
-                    <div class="tags">
-                        <span>C++</span><span>Algoritmia</span><span>Compresión</span>
                     </div>
                 </article>
 
                 <!-- Web Iker -->
-                <article class="project-item" data-category="web" data-tech="web">
-                    <div class="project-top">
-                        <div class="folder"><i class="fas fa-globe"></i></div>
-                        <div class="links">
-                            <a href="mailto:victor.astray@alu.uclm.es" title="Privado"><i class="fas fa-lock"></i></a>
+                <article class="project-card" data-category="web" data-tech="web">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-globe"></i></div>
+                            <div class="project-links">
+                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
+                                    Privado</span>
+                            </div>
                         </div>
-                    </div>
-                    <h3 data-i18n="proj_iker_title">Web Asociación Iker</h3>
-                    <p data-i18n="proj_iker_desc">Portal web para ONG con gestión de usuarios y optimización UX/UI. Implementación personalizada sobre CMS.</p>
-                    <div class="tags">
-                        <span>WordPress</span><span>PHP</span><span>CSS3</span>
+                        <h3 data-i18n="proj_iker_title">Web Asociación Iker</h3>
+                        <p data-i18n="proj_iker_desc">Portal web para ONG con gestión de usuarios, roles y contenido.
+                            Optimización UX/UI e implementación personalizada sobre CMS para facilitar la gestión no
+                            técnica.</p>
+                        <div class="project-tags">
+                            <span>WordPress</span><span>PHP</span><span>CSS3</span><span>UX/UI</span>
+                        </div>
                     </div>
                 </article>
 
                 <!-- Pokémon -->
-                <article class="project-item" data-category="game" data-tech="cpp">
-                    <div class="project-top">
-                        <div class="folder"><i class="fas fa-gamepad"></i></div>
-                        <div class="links">
-                            <a href="mailto:victor.astray@alu.uclm.es" title="Demo"><i class="fas fa-cloud"></i></a>
+                <article class="project-card" data-category="game" data-tech="cpp">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-gamepad"></i></div>
+                            <div class="project-links">
+                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
+                                    Privado</span>
+                            </div>
                         </div>
-                    </div>
-                    <h3>Pokémon Engine</h3>
-                    <p data-i18n="proj_poke_desc">Motor de juego 2D con animaciones pixel-art propias y sistema de combate por turnos programado desde cero.</p>
-                    <div class="tags">
-                        <span>C++</span><span>VS 2022</span><span>Game Dev</span>
+                        <h3>Pokémon Engine</h3>
+                        <p data-i18n="proj_poke_desc">Motor de juego 2D con animaciones pixel-art propias y sistema de
+                            combate por turnos programado desde cero, sin game engine. Gestión de estados y eventos
+                            personalizada.</p>
+                        <div class="project-tags">
+                            <span>C++</span><span>Game Dev</span><span>Pixel-Art</span>
+                        </div>
                     </div>
                 </article>
 
                 <!-- Sokoban -->
-                <article class="project-item" data-category="game" data-tech="python">
-                    <div class="project-top">
-                        <div class="folder"><i class="fas fa-cubes"></i></div>
-                        <div class="links">
-                            <a href="mailto:victor.astray@alu.uclm.es" title="Código"><i class="fas fa-cloud"></i></a>
+                <article class="project-card" data-category="game" data-tech="python">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-cubes"></i></div>
+                            <div class="project-links">
+                                <span class="badge-private" data-i18n="badge_private"><i class="fas fa-lock"></i>
+                                    Privado</span>
+                            </div>
                         </div>
-                    </div>
-                    <h3>Sokoban Logic</h3>
-                    <p data-i18n="proj_soko_desc">Recreación del clásico puzle implementando lógica de matrices para movimiento y detección de victorias.</p>
-                    <div class="tags">
-                        <span>Python</span><span>Lógica</span><span>Matrices</span>
+                        <h3>Sokoban Logic</h3>
+                        <p data-i18n="proj_soko_desc">Recreación del clásico puzle Sokoban con lógica de matrices 2D
+                            para movimiento, detección de colisiones y sistema de victorias. Interfaz por terminal y
+                            gráfica.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Lógica</span><span>Matrices</span>
+                        </div>
                     </div>
                 </article>
 
             </div>
-            
-            <p class="private-note" data-i18n="private_note">* Algunos proyectos están alojados en repositorios privados universitarios. El código fuente está disponible bajo petición.</p>
+
+            <p class="projects-note" data-i18n="private_note">
+                <i class="fas fa-info-circle"></i> Los proyectos marcados como "Privado" están en repositorios
+                universitarios. El código fuente está disponible bajo petición.
+            </p>
         </div>
     </section>
 
-    <!-- Contacto -->
-    <section id="contacto" class="section contact-section">
-        <div class="container text-center">
-            <h2 class="section-title" data-i18n="contact_title">¿Hablamos?</h2>
-            <p class="contact-text" data-i18n="contact_text">
-                Estoy buscando activamente oportunidades para iniciar mi carrera profesional. Si buscas un perfil técnico con ganas de aprender y aportar, contáctame.
-            </p>
-            
-            <div class="contact-grid">
-                <a href="mailto:victor.astray@alu.uclm.es" class="contact-card">
-                    <i class="fas fa-envelope"></i>
-                    <span>Email</span>
-                </a>
-                <a href="tel:+34671465674" class="contact-card">
-                    <i class="fas fa-phone-alt"></i>
-                    <span data-i18n="contact_call">Llamar</span>
-                </a>
-                <a href="https://linkedin.com/in/v%C3%ADctor-astray-roma-3aa9283a3/" target="_blank" class="contact-card">
-                    <i class="fab fa-linkedin-in"></i>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://github.com/VictorAstray" target="_blank" class="contact-card">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub</span>
-                </a>
+    <!-- ══════════════════════════════════════
+         CONTACTO
+    ══════════════════════════════════════ -->
+    <section id="contacto" class="section reveal">
+        <div class="container">
+            <div class="section-header center">
+                <span class="section-tag" data-i18n="contact_tag">// contacto</span>
+                <h2 class="section-title" data-i18n="contact_title">¿Hablamos?</h2>
+                <p class="contact-subtitle" data-i18n="contact_text">
+                    Estoy buscando activamente nuevas oportunidades profesionales. Si buscas un perfil técnico con ganas
+                    de aprender y aportar, escríbeme.
+                </p>
             </div>
 
-            <footer class="footer">
-                <p data-i18n="footer_text">Diseñado y Desarrollado por Víctor Astray &copy; 2026</p>
-            </footer>
+            <div class="contact-grid">
+                <a href="mailto:victor.astray@alu.uclm.es" class="contact-card" id="contact-email">
+                    <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-card-text">
+                        <span class="contact-card-label" data-i18n="contact_email_label">Email</span>
+                        <span class="contact-card-value">victor.astray@alu.uclm.es</span>
+                    </div>
+                    <i class="fas fa-arrow-right contact-arrow"></i>
+                </a>
+                <a href="https://linkedin.com/in/v%C3%ADctor-astray-roma-3aa9283a3/" target="_blank"
+                    class="contact-card" id="contact-linkedin">
+                    <div class="contact-card-icon linkedin"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="contact-card-text">
+                        <span class="contact-card-label">LinkedIn</span>
+                        <span class="contact-card-value">Víctor Astray Roma</span>
+                    </div>
+                    <i class="fas fa-arrow-right contact-arrow"></i>
+                </a>
+                <a href="https://github.com/VictorAstray" target="_blank" class="contact-card" id="contact-github">
+                    <div class="contact-card-icon github"><i class="fab fa-github"></i></div>
+                    <div class="contact-card-text">
+                        <span class="contact-card-label">GitHub</span>
+                        <span class="contact-card-value">@VictorAstray</span>
+                    </div>
+                    <i class="fas fa-arrow-right contact-arrow"></i>
+                </a>
+                <a href="tel:+34671465674" class="contact-card" id="contact-phone">
+                    <div class="contact-card-icon phone"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-card-text">
+                        <span class="contact-card-label" data-i18n="contact_phone_label">Teléfono</span>
+                        <span class="contact-card-value">+34 671 465 674</span>
+                    </div>
+                    <i class="fas fa-arrow-right contact-arrow"></i>
+                </a>
+            </div>
         </div>
     </section>
+
+    <!-- ══════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-logo"><span class="logo-bracket">[</span>VA<span class="logo-bracket">]</span></span>
+            <p class="footer-copy" data-i18n="footer_text">Diseñado & Desarrollado por Víctor Astray &copy; 2026</p>
+            <a href="#inicio" class="back-top" aria-label="Volver arriba"><i class="fas fa-arrow-up"></i></a>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>

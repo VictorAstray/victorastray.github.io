@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPOkemonApp — Demo Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ─── RESET & BASE ─── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a2e;
+            color: #e2e8f0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column
+        }
+
+        /* ─── APP SHELL ─── */
+        .app-shell {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #16213e;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden
+        }
+
+        /* ─── TOPBAR ─── */
+        .topbar {
+            height: 52px;
+            background: linear-gradient(90deg, #e53e3e, #c53030);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 12px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4)
+        }
+
+        .topbar-menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background .2s
+        }
+
+        .topbar-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2)
+        }
+
+        .topbar-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: .03em
+        }
+
+        .topbar-pokeball {
+            width: 28px;
+            height: 28px;
+            margin-left: auto;
+            opacity: .9
+        }
+
+        /* ─── MAIN AREA ─── */
+        .main-area {
+            display: flex;
+            flex: 1;
+            overflow: hidden
+        }
+
+        /* ─── SIDE MENU ─── */
+        .side-menu {
+            width: 240px;
+            background: #0f3460;
+            flex-shrink: 0;
+            transition: width .3s cubic-bezier(.4, 0, .2, 1), transform .3s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255, 255, 255, 0.08)
+        }
+
+        .side-menu.collapsed {
+            width: 48px
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 14px;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+            color: #a0aec0;
+            white-space: nowrap;
+            border-left: 3px solid transparent
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff
+        }
+
+        .menu-item.active {
+            background: rgba(229, 62, 62, 0.15);
+            color: #fc8181;
+            border-left-color: #fc8181
+        }
+
+        .menu-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            width: 22px;
+            text-align: center
+        }
+
+        .menu-label {
+            font-weight: 600;
+            font-size: .92rem;
+            overflow: hidden;
+            transition: opacity .2s
+        }
+
+        .side-menu.collapsed .menu-label {
+            opacity: 0;
+            pointer-events: none
+        }
+
+        /* ─── CONTENT AREA ─── */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            position: relative
+        }
+
+        /* ─── SCREEN: INICIO ─── */
+        .screen-inicio {
+            height: 100%;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f3460 60%, #e53e3e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            gap: 24px
+        }
+
+        .inicio-logo {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(229, 62, 62, .6)
+        }
+
+        .inicio-logo span {
+            color: #fc8181
+        }
+
+        .inicio-pokeball-big {
+            font-size: 5rem;
+            animation: rotatePokeball 4s linear infinite
+        }
+
+        @keyframes rotatePokeball {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .inicio-welcome {
+            background: rgba(255, 255, 255, .1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 16px;
+            padding: 24px 32px;
+            max-width: 500px;
+            text-align: center;
+            line-height: 1.75
+        }
+
+        .inicio-welcome h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff
+        }
+
+        .inicio-welcome p {
+            font-size: .9rem;
+            color: #cbd5e0
+        }
+
+        /* ─── SCREEN: POKÉDEX ─── */
+        .screen-pokedex {
+            padding: 20px
+        }
+
+        .pokedex-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fc8181;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .pokedex-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        .poke-card {
+            background: #0f3460;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s, border-color .2s
+        }
+
+        .poke-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(229, 62, 62, .25);
+            border-color: rgba(252, 129, 129, .5)
+        }
+
+        .poke-card img {
+            width: 80px;
+            height: 80px;
+            image-rendering: pixelated
+        }
+
+        .poke-card-name {
+            font-weight: 700;
+            font-size: .95rem;
+            color: #e2e8f0;
+            margin-top: 8px
+        }
+
+        .poke-card-num {
+            font-size: .78rem;
+            color: #718096;
+            font-family: monospace
+        }
+
+        .poke-type {
+            display: inline-block;
+            font-size: .7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            font-weight: 600
+        }
+
+        /* ─── SCREEN: INFO ─── */
+        .screen-info {
+            padding: 20px
+        }
+
+        .info-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #a0aec0;
+            font-size: .9rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+            transition: color .2s
+        }
+
+        .info-back:hover {
+            color: #fc8181
+        }
+
+        .info-card {
+            background: #0f3460;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 16px;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px
+        }
+
+        .info-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px
+        }
+
+        .info-sprite {
+            width: 150px;
+            height: 150px;
+            image-rendering: pixelated
+        }
+
+        .info-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff
+        }
+
+        .info-num {
+            color: #718096;
+            font-family: monospace;
+            font-size: .85rem
+        }
+
+        .info-types {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .info-right {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px
+        }
+
+        .info-label {
+            font-size: .75rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 600
+        }
+
+        .info-value {
+            font-size: .95rem;
+            color: #e2e8f0;
+            font-weight: 500
+        }
+
+        .info-stat-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 4px
+        }
+
+        .info-stat-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s ease
+        }
+
+        .btn-fight {
+            background: #e53e3e;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s, transform .2s;
+            margin-top: 8px;
+            width: 100%
+        }
+
+        .btn-fight:hover {
+            background: #c53030;
+            transform: translateY(-1px)
+        }
+
+        /* ─── SCREEN: MIS POKÉMON ─── */
+        .screen-mispokemon {
+            padding: 20px
+        }
+
+        .mispoke-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fc8181;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .mispoke-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .mispoke-item {
+            background: #0f3460;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: border-color .2s, background .2s
+        }
+
+        .mispoke-item:hover {
+            border-color: rgba(252, 129, 129, .4);
+            background: rgba(229, 62, 62, .1)
+        }
+
+        .mispoke-item img {
+            width: 56px;
+            height: 56px;
+            image-rendering: pixelated;
+            flex-shrink: 0
+        }
+
+        .mispoke-info {
+            flex: 1
+        }
+
+        .mispoke-name {
+            font-weight: 700;
+            color: #fff
+        }
+
+        .mispoke-type {
+            font-size: .8rem;
+            color: #a0aec0
+        }
+
+        .mispoke-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 4px
+        }
+
+        .stat-mini {
+            font-size: .8rem;
+            color: #718096
+        }
+
+        .stat-mini span {
+            color: #fc8181;
+            font-weight: 600
+        }
+
+        /* ─── SCREEN: COMBATE ─── */
+        .screen-combat {
+            height: 100%;
+            background: linear-gradient(180deg, #2d3748 0%, #1a202c 40%, #2d3748 100%);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative
+        }
+
+        .combat-scene {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px;
+            position: relative
+        }
+
+        .combat-bg-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #1a3a1a 0%, #1a2a1a 50%, #3a1a1a 100%);
+            opacity: .6
+        }
+
+        .combat-fighter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1
+        }
+
+        .combat-fighter.player {
+            align-items: flex-start
+        }
+
+        .combat-fighter.enemy {
+            align-items: flex-end
+        }
+
+        .combat-sprite {
+            width: 100px;
+            height: 100px;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .6));
+            transition: transform .1s
+        }
+
+        .combat-sprite.shake {
+            animation: shake .3s ease
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0)
+            }
+
+            25% {
+                transform: translateX(-8px)
+            }
+
+            75% {
+                transform: translateX(8px)
+            }
+        }
+
+        .combat-sprite.attack-anim {
+            animation: attackAnim .4s ease
+        }
+
+        @keyframes attackAnim {
+
+            0%,
+            100% {
+                transform: translateX(0) scale(1)
+            }
+
+            50% {
+                transform: translateX(20px) scale(1.1)
+            }
+        }
+
+        .enemy-sprite.attack-anim {
+            animation: enemyAttack .4s ease
+        }
+
+        @keyframes enemyAttack {
+
+            0%,
+            100% {
+                transform: translateX(0) scale(1)
+            }
+
+            50% {
+                transform: translateX(-20px) scale(1.1)
+            }
+        }
+
+        .combat-name {
+            font-weight: 800;
+            font-size: .95rem;
+            color: #fff
+        }
+
+        .hp-bar-wrapper {
+            width: 150px
+        }
+
+        .hp-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: .75rem;
+            color: #a0aec0;
+            margin-bottom: 3px
+        }
+
+        .hp-label span:last-child {
+            color: #68d391;
+            font-weight: 700
+        }
+
+        .hp-track {
+            height: 8px;
+            background: rgba(255, 255, 255, .1);
+            border-radius: 4px;
+            overflow: hidden
+        }
+
+        .hp-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width .5s ease, background .5s
+        }
+
+        .en-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: .75rem;
+            color: #a0aec0;
+            margin-bottom: 3px
+        }
+
+        .en-fill {
+            height: 6px;
+            border-radius: 3px;
+            background: #4299e1;
+            transition: width .5s
+        }
+
+        .en-track {
+            height: 6px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 3px;
+            overflow: hidden
+        }
+
+        .vs-badge {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fc8181;
+            text-shadow: 0 0 20px rgba(229, 62, 62, .7);
+            position: relative;
+            z-index: 1
+        }
+
+        /* Combat log */
+        .combat-log {
+            background: rgba(0, 0, 0, .7);
+            padding: 10px 16px;
+            font-size: .85rem;
+            min-height: 60px;
+            max-height: 60px;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, .08)
+        }
+
+        .combat-log-text {
+            color: #e2e8f0;
+            line-height: 1.5;
+            transition: opacity .3s
+        }
+
+        .combat-log-text.fade {
+            opacity: 0
+        }
+
+        /* Combat actions */
+        .combat-actions {
+            background: #0f1923;
+            padding: 12px 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            border-top: 1px solid rgba(255, 255, 255, .08)
+        }
+
+        .action-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: .85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .15s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px
+        }
+
+        .action-btn .btn-icon {
+            font-size: 1.1rem
+        }
+
+        .action-btn .btn-label {
+            font-size: .75rem;
+            font-weight: 600
+        }
+
+        .btn-weak {
+            background: #e53e3e;
+            color: #fff
+        }
+
+        .btn-weak:hover {
+            background: #c53030
+        }
+
+        .btn-strong {
+            background: #d69e2e;
+            color: #1a202c
+        }
+
+        .btn-strong:hover {
+            background: #b7791f
+        }
+
+        .btn-defend {
+            background: #3182ce;
+            color: #fff
+        }
+
+        .btn-defend:hover {
+            background: #2b6cb0
+        }
+
+        .btn-rest {
+            background: #38a169;
+            color: #fff
+        }
+
+        .btn-rest:hover {
+            background: #276749
+        }
+
+        .action-btn:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+            transform: none !important
+        }
+
+        .combat-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px;
+            background: #0f1923
+        }
+
+        .result-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-align: center
+        }
+
+        .result-text.win {
+            color: #68d391
+        }
+
+        .result-text.lose {
+            color: #fc8181
+        }
+
+        .btn-rematch {
+            background: #e53e3e;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .btn-rematch:hover {
+            background: #c53030
+        }
+
+        /* ─── SCREEN: ACERCA DE ─── */
+        .screen-acercade {
+            padding: 24px
+        }
+
+        .acerca-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fc8181;
+            margin-bottom: 20px
+        }
+
+        .acerca-card {
+            background: #0f3460;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .acerca-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start
+        }
+
+        .acerca-label {
+            font-size: .78rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 600;
+            min-width: 90px;
+            padding-top: 2px
+        }
+
+        .acerca-value {
+            color: #e2e8f0
+        }
+
+        .acerca-value a {
+            color: #63b3ed;
+            text-decoration: none
+        }
+
+        .acerca-value a:hover {
+            text-decoration: underline
+        }
+
+        .acerca-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, .07);
+            margin: 4px 0
+        }
+
+        .tech-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px
+        }
+
+        .tech-pill-demo {
+            background: rgba(229, 62, 62, .15);
+            border: 1px solid rgba(252, 129, 129, .3);
+            color: #fc8181;
+            font-size: .75rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 600
+        }
+
+        /* Type colors */
+        .type-normal {
+            background: #a8a878;
+            color: #fff
+        }
+
+        .type-fuego,
+        .type-fire {
+            background: #f08030;
+            color: #fff
+        }
+
+        .type-agua,
+        .type-water {
+            background: #6890f0;
+            color: #fff
+        }
+
+        .type-planta,
+        .type-grass {
+            background: #78c850;
+            color: #fff
+        }
+
+        .type-hielo,
+        .type-ice {
+            background: #98d8d8;
+            color: #1a202c
+        }
+
+        .type-lucha,
+        .type-fighting {
+            background: #c03028;
+            color: #fff
+        }
+
+        .type-veneno,
+        .type-poison {
+            background: #a040a0;
+            color: #fff
+        }
+
+        .type-tierra,
+        .type-ground {
+            background: #e0c068;
+            color: #1a202c
+        }
+
+        .type-volador,
+        .type-flying {
+            background: #a890f0;
+            color: #fff
+        }
+
+        .type-psíquico,
+        .type-psychic {
+            background: #f85888;
+            color: #fff
+        }
+
+        .type-bicho,
+        .type-bug {
+            background: #a8b820;
+            color: #fff
+        }
+
+        .type-roca,
+        .type-rock {
+            background: #b8a038;
+            color: #fff
+        }
+
+        .type-fantasma,
+        .type-ghost {
+            background: #705898;
+            color: #fff
+        }
+
+        .type-dragón,
+        .type-dragon {
+            background: #7038f8;
+            color: #fff
+        }
+
+        .type-siniestro,
+        .type-dark {
+            background: #705848;
+            color: #fff
+        }
+
+        .type-acero,
+        .type-steel {
+            background: #b8b8d0;
+            color: #1a202c
+        }
+
+        .type-hada,
+        .type-fairy {
+            background: #ee99ac;
+            color: #fff
+        }
+
+        /* ─── DEMO BANNER ─── */
+        .demo-banner {
+            background: #d69e2e;
+            color: #1a202c;
+            text-align: center;
+            font-size: .78rem;
+            font-weight: 700;
+            padding: 4px;
+            flex-shrink: 0;
+            letter-spacing: .03em
+        }
+
+        /* ── Stat colors ── */
+        .stat-hp {
+            background: #f56565
+        }
+
+        .stat-atk {
+            background: #ed8936
+        }
+
+        .stat-def {
+            background: #ecc94b
+        }
+
+        .stat-spa {
+            background: #4299e1
+        }
+
+        .stat-spd {
+            background: #9f7aea
+        }
+
+        .stat-spe {
+            background: #48bb78
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-shell">
+        <div class="demo-banner">🎮 Demo Web — IPOkemonApp (C# .NET MAUI)</div>
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <button class="topbar-menu-btn" id="menuToggle">☰</button>
+            <div class="topbar-title">IPOkemon<span style="color:#fbd38d">App</span></div>
+            <div class="topbar-pokeball">⚪</div>
+        </div>
+
+        <!-- MAIN AREA -->
+        <div class="main-area">
+            <!-- SIDE MENU -->
+            <nav class="side-menu" id="sideMenu">
+                <div class="menu-item active" data-screen="inicio" onclick="navigate('inicio')">
+                    <span class="menu-icon">🏠</span><span class="menu-label">Inicio</span>
+                </div>
+                <div class="menu-item" data-screen="mispokemon" onclick="navigate('mispokemon')">
+                    <span class="menu-icon">🎒</span><span class="menu-label">Mis Pokémon</span>
+                </div>
+                <div class="menu-item" data-screen="pokedex" onclick="navigate('pokedex')">
+                    <span class="menu-icon">📖</span><span class="menu-label">Pokédex</span>
+                </div>
+                <div class="menu-item" data-screen="combat" onclick="navigate('combat')">
+                    <span class="menu-icon">⚔️</span><span class="menu-label">Combate</span>
+                </div>
+                <div class="menu-item" data-screen="acercade" onclick="navigate('acercade')">
+                    <span class="menu-icon">❓</span><span class="menu-label">Acerca De</span>
+                </div>
+            </nav>
+
+            <!-- CONTENT -->
+            <div class="content" id="content"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ══════════════════════════════════════════════
+           POKÉMON DATA  (Jigglypuff, Oddish, Regice)
+        ══════════════════════════════════════════════ */
+        const POKEMON = {
+            jigglypuff: {
+                id: 39, name: 'Jigglypuff', num: '#039',
+                sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png',
+                spriteBack: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/39.png',
+                types: ['Normal', 'Hada'],
+                typeClasses: ['type-normal', 'type-hada'],
+                categoria: 'Pokémon Globo',
+                altura: '0.5 m', peso: '5.5 kg',
+                evolucion: 'Jigglypuff → Wigglytuff',
+                desc: 'Canta una canción de cuna con una voz melodiosa. Quienes la escuchan caen dormidos inevitablemente. Sus ojos no parpadean cuando canta.',
+                stats: { hp: 115, atk: 45, def: 20, spa: 45, spd: 25, spe: 20 },
+                maxHp: 115, maxEn: 100,
+                attacks: {
+                    weak: { name: 'Canto', power: 30, enCost: 10, desc: 'Canto suave que daña al enemigo.' },
+                    strong: { name: 'Hiperrayo', power: 65, enCost: 35, desc: '¡Un Hiperrayo devastador!' }
+                }
+            },
+            oddish: {
+                id: 43, name: 'Oddish', num: '#043',
+                sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/43.png',
+                spriteBack: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/43.png',
+                types: ['Planta', 'Veneno'],
+                typeClasses: ['type-planta', 'type-veneno'],
+                categoria: 'Pokémon Hierba',
+                altura: '0.5 m', peso: '5.4 kg',
+                evolucion: 'Oddish → Gloom → Vileplume / Bellossom',
+                desc: 'Deambula por la noche. Entierra su cuerpo en el suelo durante el día para absorber nutrientes. Sus pasos esparcen semillas.',
+                stats: { hp: 45, atk: 50, def: 55, spa: 75, spd: 65, spe: 30 },
+                maxHp: 45, maxEn: 100,
+                attacks: {
+                    weak: { name: 'Absorber', power: 28, enCost: 10, desc: 'Absorbe la energía vital del rival.' },
+                    strong: { name: 'Rayo Solar', power: 70, enCost: 40, desc: '¡Un Rayo Solar cargado de energía!' }
+                }
+            },
+            regice: {
+                id: 378, name: 'Regice', num: '#378',
+                sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/378.png',
+                spriteBack: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/378.png',
+                types: ['Hielo'],
+                typeClasses: ['type-hielo'],
+                categoria: 'Pokémon Iceberg',
+                altura: '1.8 m', peso: '175 kg',
+                evolucion: 'No evoluciona (Pokémon Legendario)',
+                desc: 'Su cuerpo está compuesto de hielo de hace miles de años. Congela el aire a su alrededor hasta -200°C. Estuvo latente durante milenios.',
+                stats: { hp: 80, atk: 50, def: 100, spa: 100, spd: 200, spe: 50 },
+                maxHp: 80, maxEn: 100,
+                attacks: {
+                    weak: { name: 'Viento Hielo', power: 35, enCost: 10, desc: 'Un viento helado azota al rival.' },
+                    strong: { name: 'Ventisca', power: 75, enCost: 40, desc: '¡Una Ventisca feroz e implacable!' }
+                }
+            }
+        };
+
+        /* State */
+        let currentScreen = 'inicio';
+        let selectedPoke = null;
+        let combat = null;
+
+        /* ══════════════════════════════════════════════
+           NAVIGATION
+        ══════════════════════════════════════════════ */
+        function navigate(screen, data) {
+            currentScreen = screen;
+            document.querySelectorAll('.menu-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.screen === screen);
+            });
+            const content = document.getElementById('content');
+            switch (screen) {
+                case 'inicio': content.innerHTML = renderInicio(); break;
+                case 'pokedex': content.innerHTML = renderPokedex(); break;
+                case 'mispokemon': content.innerHTML = renderMisPokemon(); break;
+                case 'info': content.innerHTML = renderInfo(data); break;
+                case 'combat': renderCombat(); break;
+                case 'acercade': content.innerHTML = renderAcercaDe(); break;
+            }
+        }
+
+        /* ══════════════════════════════════════════════
+           SCREENS
+        ══════════════════════════════════════════════ */
+        function renderInicio() {
+            return `
+  <div class="screen-inicio">
+    <div class="inicio-pokeball-big">⚾</div>
+    <div class="inicio-logo">IP<span>Okemon</span>App</div>
+    <div class="inicio-welcome">
+      <h2>¡Bienvenido, Entrenador!</h2>
+      <p>Una aplicación desarrollada en <strong>C# / .NET MAUI</strong> para Windows que te permite explorar tu Pokédex personal, ver información detallada de tus Pokémon y desafiarte en combates por turnos.<br><br>
+      Usa el menú lateral para navegar entre las secciones.</p>
+    </div>
+  </div>`;
+        }
+
+        function renderPokedex() {
+            return `
+  <div class="screen-pokedex">
+    <div class="pokedex-title">📖 Pokédex</div>
+    <div class="pokedex-grid">
+      ${Object.values(POKEMON).map(p => `
+        <div class="poke-card" onclick="navigate('info', '${Object.keys(POKEMON).find(k => POKEMON[k] === p)}')">
+          <img src="${p.sprite}" alt="${p.name}" loading="lazy">
+          <div class="poke-card-num">${p.num}</div>
+          <div class="poke-card-name">${p.name}</div>
+          <div>${p.typeClasses.map((tc, i) => `<span class="poke-type ${tc}">${p.types[i]}</span>`).join(' ')}</div>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+        }
+
+        function renderMisPokemon() {
+            return `
+  <div class="screen-mispokemon">
+    <div class="mispoke-title">🎒 Mis Pokémon</div>
+    <div class="mispoke-list">
+      ${Object.entries(POKEMON).map(([key, p]) => `
+        <div class="mispoke-item" onclick="navigate('info','${key}')">
+          <img src="${p.sprite}" alt="${p.name}">
+          <div class="mispoke-info">
+            <div class="mispoke-name">${p.name}</div>
+            <div class="mispoke-type">${p.types.join(' / ')}</div>
+            <div class="mispoke-stats">
+              <span class="stat-mini">HP: <span>${p.stats.hp}</span></span>
+              <span class="stat-mini">ATK: <span>${p.stats.atk}</span></span>
+              <span class="stat-mini">DEF: <span>${p.stats.def}</span></span>
+              <span class="stat-mini">SPD: <span>${p.stats.spe}</span></span>
+            </div>
+          </div>
+          <div style="color:#718096;font-size:.9rem">›</div>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+        }
+
+        function renderInfo(key) {
+            const p = POKEMON[key];
+            const statNames = { hp: 'HP', atk: 'ATQ', def: 'DEF', spa: 'AT.SP', spd: 'DF.SP', spe: 'VEL' };
+            const statColors = { hp: 'stat-hp', atk: 'stat-atk', def: 'stat-def', spa: 'stat-spa', spd: 'stat-spd', spe: 'stat-spe' };
+            return `
+  <div class="screen-info">
+    <div class="info-back" onclick="navigate('pokedex')">← Volver</div>
+    <div class="info-card">
+      <div class="info-left">
+        <img class="info-sprite" src="${p.sprite}" alt="${p.name}">
+        <div class="info-name">${p.name}</div>
+        <div class="info-num">${p.num}</div>
+        <div class="info-types">
+          ${p.typeClasses.map((tc, i) => `<span class="poke-type ${tc}">${p.types[i]}</span>`).join('')}
+        </div>
+        <button class="btn-fight" onclick="navigate('combat','${key}')">⚔️ ¡Combatir!</button>
+      </div>
+      <div class="info-right">
+        <div class="info-row"><span class="info-label">Categoría</span><span class="info-value">${p.categoria}</span></div>
+        <div class="info-row"><span class="info-label">Altura</span><span class="info-value">${p.altura}</span></div>
+        <div class="info-row"><span class="info-label">Peso</span><span class="info-value">${p.peso}</span></div>
+        <div class="info-row"><span class="info-label">Evolución</span><span class="info-value">${p.evolucion}</span></div>
+        <div class="info-row"><span class="info-label">Descripción</span><span class="info-value" style="font-size:.88rem;color:#a0aec0">${p.desc}</span></div>
+        <div style="margin-top:4px">
+          <div class="info-label" style="margin-bottom:8px">Estadísticas</div>
+          ${Object.entries(p.stats).map(([st, val]) => `
+            <div style="margin-bottom:6px">
+              <div style="display:flex;justify-content:space-between;font-size:.75rem;color:#a0aec0;margin-bottom:3px">
+                <span>${statNames[st]}</span><span style="color:#e2e8f0;font-weight:600">${val}</span>
+              </div>
+              <div class="info-stat-bar"><div class="info-stat-fill ${statColors[st]}" style="width:${Math.min(100, (val / 200) * 100)}%"></div></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  </div>`;
+        }
+
+        /* ══════════════════════════════════════════════
+           COMBAT ENGINE
+        ══════════════════════════════════════════════ */
+        function renderCombat(preselected) {
+            const keys = Object.keys(POKEMON);
+            // Player = random, Enemy = different random
+            const playerKey = preselected || keys[Math.floor(Math.random() * keys.length)];
+            let enemyKey = keys[Math.floor(Math.random() * keys.length)];
+            while (enemyKey === playerKey) enemyKey = keys[Math.floor(Math.random() * keys.length)];
+
+            const player = { ...JSON.parse(JSON.stringify(POKEMON[playerKey])), key: playerKey, hp: POKEMON[playerKey].stats.hp, en: 100, shield: false };
+            const enemy = { ...JSON.parse(JSON.stringify(POKEMON[enemyKey])), key: enemyKey, hp: POKEMON[enemyKey].stats.hp, en: 100, shield: false };
+
+            combat = { player, enemy, playerTurn: true, log: 'Turno del jugador — ¡elige tu acción!', over: false };
+            drawCombat();
+        }
+
+        function drawCombat() {
+            const c = combat;
+            const content = document.getElementById('content');
+            document.querySelectorAll('.menu-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.screen === 'combat');
+            });
+
+            if (c.over) {
+                const won = c.player.hp > 0;
+                content.innerHTML = `
+    <div class="screen-combat" style="align-items:center;justify-content:center;gap:20px;background:${won ? 'linear-gradient(135deg,#1a3a1a,#0f2010)' : 'linear-gradient(135deg,#3a1a1a,#200f0f)'}">
+      <div style="font-size:4rem">${won ? '🏆' : '💀'}</div>
+      <div class="result-text ${won ? 'win' : 'lose'}">${won ? '¡VICTORIA!' : '¡DERROTA!'}</div>
+      <div style="font-size:.9rem;color:#a0aec0;text-align:center">
+        ${won ? `${c.player.name} ha derrotado a ${c.enemy.name}` : `${c.enemy.name} ha derrotado a ${c.player.name}`}
+      </div>
+      <button class="btn-rematch" onclick="renderCombat()">¡Revancha! 🔁</button>
+      <button class="btn-rematch" style="background:#2b6cb0" onclick="navigate('pokedex')">Volver al Pokédex</button>
+    </div>`;
+                return;
+            }
+
+            const playerHpPct = Math.max(0, (c.player.hp / c.player.stats.hp) * 100);
+            const enemyHpPct = Math.max(0, (c.enemy.hp / c.enemy.stats.hp) * 100);
+            const playerEnPct = Math.max(0, c.player.en);
+            const enemyEnPct = Math.max(0, c.enemy.en);
+            const hpColor = (p) => p > 50 ? '#68d391' : p > 25 ? '#ecc94b' : '#f56565';
+            const btnsDisabled = !c.playerTurn ? 'disabled' : '';
+
+            content.innerHTML = `
+  <div class="screen-combat">
+    <div class="combat-scene">
+      <div class="combat-bg-label"></div>
+      <!-- ENEMY (right side in app → shown left in web) -->
+      <div class="combat-fighter enemy">
+        <div class="hp-bar-wrapper">
+          <div class="hp-label"><span>${c.enemy.name}</span><span>${Math.max(0, Math.round(c.enemy.hp))}/${c.enemy.stats.hp}</span></div>
+          <div class="hp-track"><div class="hp-fill" id="enemyHp" style="width:${enemyHpPct}%;background:${hpColor(enemyHpPct)}"></div></div>
+          <div class="en-label" style="margin-top:4px"><span style="font-size:.7rem;color:#4299e1">⚡ Energía</span><span style="font-size:.7rem;color:#4299e1">${Math.round(c.enemy.en)}</span></div>
+          <div class="en-track"><div class="en-fill" id="enemyEn" style="width:${enemyEnPct}%"></div></div>
+        </div>
+        <img class="combat-sprite" id="enemySprite" src="${c.enemy.sprite}" alt="${c.enemy.name}" style="${c.enemy.shield ? 'filter:drop-shadow(0 0 8px #4299e1) drop-shadow(0 4px 12px rgba(0,0,0,.6))' : 'filter:drop-shadow(0 4px 12px rgba(0,0,0,.6))'}">
+        ${c.enemy.shield ? '<div style="font-size:.75rem;color:#4299e1;font-weight:700">🛡 Defendiendo</div>' : ''}
+      </div>
+
+      <div class="vs-badge">VS</div>
+
+      <!-- PLAYER -->
+      <div class="combat-fighter player">
+        <img class="combat-sprite" id="playerSprite" src="${c.player.spriteBack || c.player.sprite}" alt="${c.player.name}" style="${c.player.shield ? 'filter:drop-shadow(0 0 8px #4299e1) drop-shadow(0 4px 12px rgba(0,0,0,.6))' : 'filter:drop-shadow(0 4px 12px rgba(0,0,0,.6))'}">
+        ${c.player.shield ? '<div style="font-size:.75rem;color:#4299e1;font-weight:700">🛡 Defendiendo</div>' : ''}
+        <div class="hp-bar-wrapper">
+          <div class="hp-label"><span>${c.player.name}</span><span>${Math.max(0, Math.round(c.player.hp))}/${c.player.stats.hp}</span></div>
+          <div class="hp-track"><div class="hp-fill" id="playerHp" style="width:${playerHpPct}%;background:${hpColor(playerHpPct)}"></div></div>
+          <div class="en-label" style="margin-top:4px"><span style="font-size:.7rem;color:#4299e1">⚡ Energía</span><span style="font-size:.7rem;color:#4299e1">${Math.round(c.player.en)}</span></div>
+          <div class="en-track"><div class="en-fill" id="playerEn" style="width:${playerEnPct}%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOG -->
+    <div class="combat-log">
+      <div class="combat-log-text" id="combatLog">${c.log}</div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="combat-actions">
+      <button class="action-btn btn-weak" ${btnsDisabled} onclick="playerAction('weak')">
+        <span class="btn-icon">💥</span>
+        <span class="btn-label">${c.player.attacks.weak.name}</span>
+        <span style="font-size:.68rem;opacity:.8">-${c.player.attacks.weak.enCost}⚡</span>
+      </button>
+      <button class="action-btn btn-strong" ${btnsDisabled} onclick="playerAction('strong')">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-label">${c.player.attacks.strong.name}</span>
+        <span style="font-size:.68rem;opacity:.8">-${c.player.attacks.strong.enCost}⚡</span>
+      </button>
+      <button class="action-btn btn-defend" ${btnsDisabled} onclick="playerAction('defend')">
+        <span class="btn-icon">🛡</span>
+        <span class="btn-label">Defenderse</span>
+      </button>
+      <button class="action-btn btn-rest" ${btnsDisabled} onclick="playerAction('rest')">
+        <span class="btn-icon">💤</span>
+        <span class="btn-label">Descansar</span>
+      </button>
+    </div>
+  </div>`;
+        }
+
+        function setLog(msg) {
+            const el = document.getElementById('combatLog');
+            if (!el) return;
+            el.classList.add('fade');
+            setTimeout(() => { el.textContent = msg; el.classList.remove('fade'); }, 200);
+        }
+
+        function calcDamage(attacker, defender, isStrong) {
+            const atk = isStrong ? attacker.attacks.strong : attacker.attacks.weak;
+            const power = atk.power;
+            // Defence reduces damage by up to 30%
+            const defReduction = defender.shield ? 0.45 : 0;
+            const rawDmg = power * (0.85 + Math.random() * 0.3);
+            return Math.max(1, rawDmg * (1 - defReduction));
+        }
+
+        function playerAction(type) {
+            if (!combat.playerTurn || combat.over) return;
+            const p = combat.player;
+            const e = combat.enemy;
+            e.shield = false; // enemy shield resets each turn
+
+            let logMsg = '';
+            if (type === 'weak') {
+                if (p.en < p.attacks.weak.enCost) { setLog('⚠️ ¡No tienes energía suficiente!'); return; }
+                const dmg = calcDamage(p, e, false);
+                e.hp -= dmg;
+                p.en -= p.attacks.weak.enCost;
+                logMsg = `💥 ${p.name} usó ${p.attacks.weak.name} → ${e.name} recibió ${dmg.toFixed(0)} daño.`;
+                animateAttack('playerSprite', 'enemySprite');
+            } else if (type === 'strong') {
+                if (p.en < p.attacks.strong.enCost) { setLog('⚠️ ¡No tienes energía suficiente para el ataque fuerte!'); return; }
+                const dmg = calcDamage(p, e, true);
+                e.hp -= dmg;
+                p.en -= p.attacks.strong.enCost;
+                logMsg = `⚡ ${p.name} usó ${p.attacks.strong.name} → ¡${dmg.toFixed(0)} de daño!`;
+                animateAttack('playerSprite', 'enemySprite');
+            } else if (type === 'defend') {
+                p.shield = true;
+                logMsg = `🛡 ${p.name} se prepara para defenderse.`;
+            } else if (type === 'rest') {
+                p.en = Math.min(100, p.en + 40);
+                p.hp = Math.min(p.stats.hp, p.hp + 5);
+                logMsg = `💤 ${p.name} descansó y recuperó energía (+40⚡, +5HP).`;
+            }
+
+            if (e.hp <= 0) {
+                e.hp = 0;
+                combat.over = true;
+                setTimeout(() => drawCombat(), 600);
+                setTimeout(() => { combat.log = logMsg; setLog(logMsg + ' ¡Victoria!'); drawCombat(); }, 1200);
+                return;
+            }
+
+            combat.playerTurn = false;
+            combat.log = logMsg;
+            drawCombat();
+
+            // Enemy AI turn
+            const aiDelay = 1000 + Math.random() * 500;
+            setTimeout(() => enemyTurn(), aiDelay);
+        }
+
+        function enemyTurn() {
+            if (combat.over) return;
+            const p = combat.player;
+            const e = combat.enemy;
+            p.shield = false;
+
+            // Simple AI: strong attack if enough energy, rest if low energy, defend sometimes
+            const rand = Math.random();
+            let logMsg = '';
+            if (e.hp < e.stats.hp * 0.3 && rand < 0.35) {
+                // Low HP: rest
+                e.en = Math.min(100, e.en + 40);
+                e.hp = Math.min(e.stats.hp, e.hp + 5);
+                logMsg = `💤 ${e.name} descansó y recuperó energía.`;
+            } else if (rand < 0.2) {
+                // Defend
+                e.shield = true;
+                logMsg = `🛡 ${e.name} se pone en guardia.`;
+            } else if (e.en >= e.attacks.strong.enCost && rand < 0.45) {
+                // Strong attack
+                const dmg = calcDamage(e, p, true);
+                p.hp -= dmg;
+                e.en -= e.attacks.strong.enCost;
+                logMsg = `⚡ ${e.name} usó ${e.attacks.strong.name} → ¡${dmg.toFixed(0)} de daño!`;
+                animateAttack('enemySprite', 'playerSprite');
+            } else {
+                // Weak attack
+                if (e.en < e.attacks.weak.enCost) {
+                    e.en = Math.min(100, e.en + 40); logMsg = `💤 ${e.name} descansó.`;
+                } else {
+                    const dmg = calcDamage(e, p, false);
+                    p.hp -= dmg;
+                    e.en -= e.attacks.weak.enCost;
+                    logMsg = `💥 ${e.name} usó ${e.attacks.weak.name} → ${dmg.toFixed(0)} daño.`;
+                    animateAttack('enemySprite', 'playerSprite');
+                }
+            }
+
+            if (p.hp <= 0) {
+                p.hp = 0;
+                combat.over = true;
+                combat.log = logMsg;
+                setTimeout(() => drawCombat(), 700);
+                return;
+            }
+
+            combat.playerTurn = true;
+            combat.log = logMsg + ' — Tu turno.';
+            drawCombat();
+        }
+
+        function animateAttack(attackerId, targetId) {
+            setTimeout(() => {
+                const a = document.getElementById(attackerId);
+                const t = document.getElementById(targetId);
+                if (a) { a.classList.add('attack-anim'); setTimeout(() => a.classList.remove('attack-anim'), 400); }
+                if (t) { setTimeout(() => { t.classList.add('shake'); setTimeout(() => t.classList.remove('shake'), 300); }, 200); }
+            }, 50);
+        }
+
+        function renderAcercaDe() {
+            return `
+  <div class="screen-acercade">
+    <div class="acerca-title">❓ Acerca De</div>
+    <div class="acerca-card">
+      <div class="acerca-row"><span class="acerca-label">Aplicación</span><span class="acerca-value">IPOkemonApp</span></div>
+      <div class="acerca-divider"></div>
+      <div class="acerca-row"><span class="acerca-label">Descripción</span><span class="acerca-value">Aplicación de escritorio Pokémon con Pokédex personal, fichas detalladas y sistema de combate por turnos.</span></div>
+      <div class="acerca-divider"></div>
+      <div class="acerca-row"><span class="acerca-label">Desarrollado por</span><span class="acerca-value">Víctor Astray Roma</span></div>
+      <div class="acerca-row"><span class="acerca-label">GitHub</span><span class="acerca-value"><a href="https://github.com/VictorAstray/IPOkemonApp" target="_blank">VictorAstray/IPOkemonApp</a></span></div>
+      <div class="acerca-divider"></div>
+      <div class="acerca-row">
+        <span class="acerca-label">Tecnologías</span>
+        <div class="tech-pills">
+          <span class="tech-pill-demo">C#</span>
+          <span class="tech-pill-demo">.NET MAUI</span>
+          <span class="tech-pill-demo">WinUI / UWP</span>
+          <span class="tech-pill-demo">XAML</span>
+          <span class="tech-pill-demo">Visual Studio 2022</span>
+        </div>
+      </div>
+      <div class="acerca-divider"></div>
+      <div class="acerca-row"><span class="acerca-label">Nota</span><span class="acerca-value" style="font-size:.85rem;color:#718096">Esta demo web reproduce fielmente la lógica del combate por turnos y la información del Pokédex de la aplicación original de escritorio.</span></div>
+    </div>
+  </div>`;
+        }
+
+        /* ══════════════════════════════════════════════
+           MENU TOGGLE
+        ══════════════════════════════════════════════ */
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('sideMenu').classList.toggle('collapsed');
+        });
+
+        /* INIT */
+        navigate('inicio');
+    </script>
+</body>
+
+</html>
